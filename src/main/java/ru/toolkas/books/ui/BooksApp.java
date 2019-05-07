@@ -1,4 +1,4 @@
-package ru.toolkas.books;
+package ru.toolkas.books.ui;
 
 import javax.servlet.annotation.WebServlet;
 
