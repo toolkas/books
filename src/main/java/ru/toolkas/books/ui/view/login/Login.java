@@ -1,12 +1,21 @@
 package ru.toolkas.books.ui.view.login;
 
+import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import org.apache.log4j.Logger;
+
+import java.util.function.Consumer;
 
 public class Login extends VerticalLayout {
-    public Login() {
+    private static final Logger LOGGER = Logger.getLogger(Login.class);
+
+    public Login(Consumer<Credentials> onLogin) {
         setSizeFull();
         setSpacing(false);
         setMargin(false);
@@ -43,12 +52,31 @@ public class Login extends VerticalLayout {
         password.setIcon(VaadinIcons.PASSWORD);
         layout.addComponent(password);
 
-        Button button = new Button("ВХОД");
+
+        Binder<Credentials> binder = new Binder<>(Credentials.class);
+        binder.forField(login).withValidator(new StringLengthValidator("Введите логин", 1, 100)).bind(Credentials::getLogin, Credentials::setLogin);
+        binder.forField(password).withValidator(new StringLengthValidator("Введите пароль", 1, 100)).bind(Credentials::getPassword, Credentials::setPassword);
+
+        Button button = new Button("ВХОД", (Button.ClickListener) clickEvent -> {
+            try {
+                if (binder.validate().isOk()) {
+                    Credentials credentials = new Credentials();
+                    binder.writeBean(credentials);
+
+                    onLogin.accept(credentials);
+                }
+            } catch (ValidationException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+                new Notification(String.format("Произошла ошибка: %s", ex.getMessage()), Notification.Type.ERROR_MESSAGE).show(Page.getCurrent());
+            }
+        });
         button.addStyleName(ValoTheme.BUTTON_BORDERLESS_COLORED);
         button.setSizeFull();
         layout.addComponent(button);
 
         addComponent(layout);
         setComponentAlignment(layout, Alignment.MIDDLE_CENTER);
+
+
     }
 }
