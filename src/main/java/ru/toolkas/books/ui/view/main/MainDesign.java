@@ -28,6 +28,7 @@ public class MainDesign extends HorizontalLayout {
     protected Button logout;
     protected Label viewTitle;
     protected CssLayout content;
+    protected CssLayout content2;
 
     public MainDesign() {
         Design.read(this);
