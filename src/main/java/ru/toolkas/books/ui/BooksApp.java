@@ -17,7 +17,6 @@ import java.util.Objects;
 
 @Theme("mytheme")
 public class BooksApp extends UI {
-
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         Page.getCurrent().setTitle("Библиотека");

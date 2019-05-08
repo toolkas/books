@@ -1,10 +1,14 @@
 package ru.toolkas.books.ui.view.main;
 
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.server.Page;
+import com.vaadin.ui.Button;
+import ru.toolkas.books.ui.session.BookSession;
 
-public class Main extends VerticalLayout {
+public class Main extends MainDesign {
     public Main() {
-        addComponent(new Label("Тут будут книги"));
+        logout.addClickListener((Button.ClickListener) clickEvent -> {
+            BookSession.logout(getSession());
+            Page.getCurrent().reload();
+        });
     }
 }
