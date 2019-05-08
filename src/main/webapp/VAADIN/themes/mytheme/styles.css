@@ -1627,8 +1627,12 @@ div.v-layout.v-horizontal.v-widget {
 	vertical-align: top;
 }
 
+.mytheme {
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
 .mytheme.v-app, .mytheme.v-app-loading {
-	font: 300 16px/1.55 "Open Sans", sans-serif;
+	font: 300 16px/1.55 "Roboto", Arial, Helvetica, sans-serif;
 	color: #464646;
 	background-color: #fafafa;
 	cursor: default;
@@ -15202,4 +15206,38 @@ div.v-layout.v-horizontal.v-widget {
 	display: inline-block;
 	width: 19px;
 	overflow: hidden;
+}
+
+.mytheme .login {
+	background-color: #1976D3;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.mytheme .login .logo {
+	margin: 10px;
+}
+
+.mytheme .login .title {
+	margin-top: 14px;
+	margin-right: 10px;
+	color: #005B9C;
+	font-weight: 700;
+}
+
+.mytheme .login .loginWindow {
+	background-color: white;
+	padding: 10px;
+}
+
+.mytheme .login .v-textfield {
+	background-color: inherit;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-radius: unset;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	font-size: 14px;
 }
